@@ -1,3 +1,3 @@
 module EeePub
-  VERSION = '99.0.1-dev'.freeze
+  VERSION = '99.1.2-dev'.freeze
 end
