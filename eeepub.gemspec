@@ -1,24 +1,34 @@
-# -*- encoding: utf-8 -*-
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'eeepub/version'
 
-Gem::Specification.new do |s|
-  s.name        = "eeepub"
-  s.version     = "0.8.1"
-  s.platform    = Gem::Platform::RUBY
-  s.authors     = ["jugyo"]
-  s.email       = ["jugyo.org@gmail.com"]
-  s.homepage    = "http://github.com/jugyo/eeepub"
-  s.summary     = %q{ePub generator}
-  s.description = %q{EeePub is a Ruby ePub generator.}
+Gem::Specification.new do |spec|
+  spec.name = 'eeepub'
+  spec.version = EeePub::VERSION
+  spec.platform = Gem::Platform::RUBY
+  spec.authors = ['jugyo']
+  spec.email = ['jugyo.org@gmail.com']
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  spec.summary = 'ePub generator'
+  spec.description = 'EeePub is a Ruby ePub generator.'
+  spec.homepage = 'http://github.com/jugyo/eeepub'
 
-  s.add_dependency "builder"
-  s.add_dependency "rubyzip"
-  s.add_development_dependency "rspec"
-  s.add_development_dependency "nokogiri"
-  s.add_development_dependency "rr"
-  s.add_development_dependency "simplecov"  
+  spec.files = `git ls-files -z`.split("\x0").reject do |f|
+    f.match(%r{^(test|spec|features|.keep)/})
+  end
+  spec.test_files = Dir['spec/**/*']
+  spec.bindir = 'exe'
+  spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.require_paths = ['lib']
+
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'nokogiri'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rr'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'simplecov'
+
+  spec.add_runtime_dependency 'builder'
+  spec.add_runtime_dependency 'rubyzip'
 end
